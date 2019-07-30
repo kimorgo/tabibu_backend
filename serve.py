@@ -75,6 +75,11 @@ def main_page():
     createtables()
     return render_template("index.html")
 
+@app.route("/<name>")
+def load_page(name):
+    print(name)
+    return render_template(name)
+
 @app.route("/register",methods = ["POST","GET"])
 def register():
     username = str(request.json.get("username"))
@@ -175,6 +180,18 @@ def getinvoices():
 
     return jsonify(res)
 
+@app.route("/getallinvoices", methods = ["POST","GET"])
+def getallinvoices():
+    
+    sql = "SELECT * FROM invoices "
+    connection = connect()
+    cur = connection.cursor()
+     
+    cur.execute(sql)
+    res = cur.fetchall()
+
+    return jsonify(res)
+
 @app.route("/getconsultation", methods = ["POST","GET"])
 def getconsultation():
     patient_id = str(request.json.get("patient_id"))
@@ -215,7 +232,7 @@ def getambulances():
 @app.route("/getserved", methods = ["POST","GET"])
 def getserved():
     
-    sql = "SELECT * FROM consultation WHERE served = 'true'"
+    sql = "SELECT * FROM consultations WHERE served = 'true'"
     connection = connect()
     cur = connection.cursor()
     cur.execute(sql)

@@ -12,13 +12,13 @@
   <title>Consultant - Consultations</title>
 
   <!-- Custom fonts for this template-->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
   <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -151,70 +151,15 @@
                     </div>
                     <div class="card-body">
                       <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-bordered" id="consultation" width="100%" cellspacing="0">
                           <thead>
                             <tr>
-                              <th>Name</th>
-                              <th>Position</th>
-                              <th>Office</th>
-                              <th>Age</th>
-                              <th>Start date</th>
-                              <th>Salary</th>
+                              <th>Consultation ID</th>
+                              <th>Patient ID</th>
+                              <th>Symptoms</th>
                             </tr>
                           </thead>
-                          <tfoot>
-                            <tr>
-                              <th>Name</th>
-                              <th>Position</th>
-                              <th>Office</th>
-                              <th>Age</th>
-                              <th>Start date</th>
-                              <th>Salary</th>
-                            </tr>
-                          </tfoot>
-                          <tbody>
-                            <tr>
-                              <td>Tiger Nixon</td>
-                              <td>System Architect</td>
-                              <td>Edinburgh</td>
-                              <td>61</td>
-                              <td>2011/04/25</td>
-                              <td>$320,800</td>
-                            </tr>
-                            <tr>
-                              <td>Garrett Winters</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>63</td>
-                              <td>2011/07/25</td>
-                              <td>$170,750</td>
-                            </tr>
-                            <tr>
-                              <td>Ashton Cox</td>
-                              <td>Junior Technical Author</td>
-                              <td>San Francisco</td>
-                              <td>66</td>
-                              <td>2009/01/12</td>
-                              <td>$86,000</td>
-                            </tr>
-                            <tr>
-                              <td>Cedric Kelly</td>
-                              <td>Senior Javascript Developer</td>
-                              <td>Edinburgh</td>
-                              <td>22</td>
-                              <td>2012/03/29</td>
-                              <td>$433,060</td>
-                            </tr>
-                            <tr>
-                              <td>Airi Satou</td>
-                              <td>Accountant</td>
-                              <td>Tokyo</td>
-                              <td>33</td>
-                              <td>2008/11/28</td>
-                              <td>$162,700</td>
-                            </tr>
-                            
-                          </tbody>
+                          
                         </table>
                       </div>
                     </div>
@@ -296,21 +241,43 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="static/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="vendor/chart.js/Chart.min.js"></script>
+  <script src="static//chart.js/Chart.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/chart-area-demo.js"></script>
-  <script src="js/demo/chart-pie-demo.js"></script>
+  <script src="static/js/demo/chart-area-demo.js"></script>
+  <script src="static/js/demo/chart-pie-demo.js"></script>
+  <!-- Page level plugins -->
+  <script src="static/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+    $('#consultation').DataTable({
+        "processing" : true,
+        "ajax" : {
+            "url" :"http://192.168.1.8:5000/getallconsultation",
+            dataSrc : ''
+        },
+        "columns" : [ {
+            "data" : "id"
+        }, {
+            "data" : "patient_id"
+        }, {
+            "data" :  "symptoms"
+        }]
+    });
+});
+  </script>
 
 </body>
 
